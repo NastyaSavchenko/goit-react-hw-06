@@ -1,8 +1,11 @@
 import s from "./SearchBox.module.css";
+import { useDispatch, useSelector } from "react-redux";
 
-function SearchBox({ searchName, setSearchName }) {
+function SearchBox() {
+  const dispatch = useDispatch();
+  const searchName = useSelector((state) => state.filters?.name);
   const handleInputChange = (e) => {
-    setSearchName(e.target.value);
+    dispatch("filter", e.target.value);
   };
   return (
     <div className={s.searchBox}>

@@ -1,9 +1,16 @@
 import s from "./Contact.module.css";
 import { IoPerson } from "react-icons/io5";
 import { FaPhoneAlt } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 
-function Contact({ contact, handleDeleteContact }) {
+function Contact(contact) {
   const { name, number, id } = contact;
+
+  const dispatch = useDispatch();
+
+  const handleDeleteContact = (id) => {
+    dispatch("deletecontact", id);
+  };
 
   return (
     <li className={s.box}>

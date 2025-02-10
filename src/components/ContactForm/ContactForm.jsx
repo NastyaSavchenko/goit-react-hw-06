@@ -2,8 +2,9 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import s from "./ContactForm.module.css";
 import * as Yup from "yup";
 import { nanoid } from "nanoid";
+import { useDispatch } from "react-redux";
 
-function ContactForm({ setContacts }) {
+function ContactForm() {
   const contactSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, "Too small")
@@ -18,14 +19,15 @@ function ContactForm({ setContacts }) {
     name: "",
     number: "",
   };
+
+  const dispatch = useDispatch();
+
   const handleSubmit = (value, options) => {
     const newContact = {
       id: nanoid(),
       ...value,
     };
-    setContacts((prevState) => {
-      return [...prevState, newContact];
-    });
+    dispatch({ type: "newcontact", payload: newContact });
     options.resetForm();
   };
 
