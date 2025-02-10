@@ -7,31 +7,33 @@ const initialState = {
   },
 };
 
-export const contactsReduser = (state = initialState, action) => {
-  console.log(action.payload);
+export const contactsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "newcontact":
+    case "addContact":
       return {
         ...state,
         contacts: {
+          ...state.contacts,
           items: [...state.contacts.items, action.payload],
         },
       };
 
-    case "deletecontact": {
+    case "deleteContact":
       return {
         ...state,
         contacts: {
+          ...state.contacts,
           items: state.contacts.items.filter(
             (contact) => contact.id !== action.payload
           ),
         },
       };
-    }
+
     case "filter":
       return {
         ...state,
         filters: {
+          ...state.filters,
           name: action.payload,
         },
       };
